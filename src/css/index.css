@@ -1,0 +1,16 @@
+:root {
+  line-height: 15px;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  --green: rgb(93, 175, 116);
+  --white: rgb(255, 255, 255);
+  --black: rgba(0, 0, 0, 0.8);
+}
+
+body {
+  margin: 0;
+  display: flex;
+}
