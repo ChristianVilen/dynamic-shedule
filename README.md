@@ -2,8 +2,8 @@
 
 To get project running
 
-* ``npm i && npm run dev``
-* project running at localhost:8000
+- `npm i && npm run dev`
+- project running at localhost:8000
 
 The app now displays a schedule of the current month with the program tasks in the right places. Incomplete tasks are
 moved to the current day forward in the order of oldest -> newest. Program.json has some of my extra input to
@@ -11,10 +11,10 @@ demonstrate the moving the incomplete tasks better.
 
 Notes:git rebase --interactive --root
 
-* Uses Vite to run project
-* Uses TypeScript
-* Luxon library to handle the dates
-* Tried out css modules for scoped css
+- Uses Vite to run project
+- Uses TypeScript
+- Luxon library to handle the dates
+- Tried out css modules for scoped css
 
 ## Input Format
 
@@ -72,13 +72,13 @@ Your app should match the design in the picture above using the following specs:
 
 ### Colors
 
-* Black: `rgba(0, 0, 0, 0.8)`
-* Green: `rgb(93, 175, 116)`
-* White: `rgb(255, 255, 255)`
+- Black: `rgba(0, 0, 0, 0.8)`
+- Green: `rgb(93, 175, 116)`
+- White: `rgb(255, 255, 255)`
 
 ### Text Styles
 
-* `h1` [Fjalla One 700](https://fonts.google.com/?query=Fjalla+One) `48px / 1.3`
-* `h2` [Libre Franklin 700](https://fonts.google.com/?query=Libre+Franklin) `64px`
-* `h3` [Libre Franklin 400](https://fonts.google.com/?query=Libre+Franklin) `10px / 1.2`
-* `th` [Work Sans 700](https://fonts.google.com/?query=Work+Sans) `16px`
+- `h1` [Fjalla One 700](https://fonts.google.com/?query=Fjalla+One) `48px / 1.3`
+- `h2` [Libre Franklin 700](https://fonts.google.com/?query=Libre+Franklin) `64px`
+- `h3` [Libre Franklin 400](https://fonts.google.com/?query=Libre+Franklin) `10px / 1.2`
+- `th` [Work Sans 700](https://fonts.google.com/?query=Work+Sans) `16px`
