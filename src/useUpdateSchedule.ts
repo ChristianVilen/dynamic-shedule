@@ -14,9 +14,12 @@ export const useUpdateSchedule = () => {
       const isCompleted = scheduleItem.completed
       const isInFuture = scheduleItem.date.startOf('day') >= currentDateTime.startOf('day')
 
-      if (hasTask && isInFuture) {
+      const taskInFuture = hasTask && isInFuture
+      const hasNotCompletedTask = hasTask && !isCompleted
+
+      if (taskInFuture) {
         // if the future task will not be overridden do not push
-        if (incompleteTasks.length < scheduleItem.date?.day - DateTime.now().day) {
+        if (incompleteTasks.length < scheduleItem.date?.day - currentDateTime.day) {
           return
         }
 
@@ -24,7 +27,7 @@ export const useUpdateSchedule = () => {
         return
       }
       // add past incomplete to list
-      if (hasTask && !isCompleted) {
+      if (hasNotCompletedTask) {
         incompleteTasks.push(scheduleItem)
       }
     })
