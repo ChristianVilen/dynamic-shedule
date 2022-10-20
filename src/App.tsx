@@ -5,18 +5,17 @@ import { ScheduleItem } from './types'
 import { addTasks, fillWeekdays, range } from './utils'
 
 function App() {
-  const now = new Date()
+  const now = DateTime.fromObject({ day: 10, month: 9, year: 2022 })
   const firstDay = DateTime.local().startOf('month')
   const lastDay = DateTime.local().endOf('month')
   const datesInCurrentMonth = range(firstDay.day, lastDay.day)
 
-  const createSchedule: ScheduleItem[] = datesInCurrentMonth.map((it) => {
-    const jsDate = new Date(now.setDate(it))
-    const luxonDate = DateTime.fromJSDate(jsDate)
+  const createSchedule: ScheduleItem[] = datesInCurrentMonth.map((dayNum) => {
+    const date = now.set({ day: dayNum })
 
     return {
-      date: luxonDate,
-      day: luxonDate.weekday,
+      date,
+      day: date.weekday,
       task: ''
     }
   })
@@ -26,7 +25,7 @@ function App() {
 
   return (
     <main>
-      <Calendar scheduleItems={scheduleWithTasks} />
+      <Calendar scheduleItems={scheduleWithTasks} currentDateTime={now} />
     </main>
   )
 }

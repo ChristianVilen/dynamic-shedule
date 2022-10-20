@@ -3,14 +3,14 @@ import styles from '../css/calendar.module.css'
 import { DateTime } from 'luxon'
 import { ScheduleItem } from '../types'
 
-export const CalendarItem = ({ item }: { item: ScheduleItem }) => {
+export const CalendarItem = ({ item, currentDateTime }: { item: ScheduleItem; currentDateTime: DateTime }) => {
   if (!item.date) {
     return <div className={styles.item} />
   }
 
   const hasCompletedTask = item.task && item.completed
-  const isActive = DateTime.now().day === item.date.day
-  const futureTask = item.date.day >= DateTime.now().day && item.hasOwnProperty('completed')
+  const isActive = currentDateTime.day === item.date.day
+  const futureTask = item.date.day >= currentDateTime.day && item.hasOwnProperty('completed')
 
   return (
     <div className={`${styles.item} ${isActive ? styles.activeBackground : ''}`}>

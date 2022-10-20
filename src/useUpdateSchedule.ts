@@ -2,7 +2,7 @@ import { ScheduleItem } from './types'
 import { DateTime } from 'luxon'
 
 export const useUpdateSchedule = () => {
-  function getIncompleteTasks(scheduleItems: ScheduleItem[]) {
+  function getIncompleteTasks(scheduleItems: ScheduleItem[], currentDateTime: DateTime) {
     let incompleteTasks: ScheduleItem[] = []
 
     scheduleItems.forEach((scheduleItem) => {
@@ -12,7 +12,7 @@ export const useUpdateSchedule = () => {
 
       const hasTask = scheduleItem.hasOwnProperty('completed')
       const isCompleted = scheduleItem.completed
-      const isInFuture = scheduleItem.date.startOf('day') >= DateTime.now().startOf('day')
+      const isInFuture = scheduleItem.date.startOf('day') >= currentDateTime.startOf('day')
 
       if (hasTask && isInFuture) {
         // if the future task will not be overridden do not push
@@ -32,13 +32,17 @@ export const useUpdateSchedule = () => {
     return incompleteTasks
   }
 
-  function updateSchedule(scheduleItems: ScheduleItem[], incompleteTasks: ScheduleItem[]): ScheduleItem[] {
+  function updateSchedule(
+    scheduleItems: ScheduleItem[],
+    incompleteTasks: ScheduleItem[],
+    currentDateTime: DateTime
+  ): ScheduleItem[] {
     if (incompleteTasks.length === 0) {
       return scheduleItems
     }
 
     const addDatesForWhereItemsShouldBe = incompleteTasks.map((it, index) => {
-      const newDate = DateTime.now().plus({ days: index })
+      const newDate = currentDateTime.plus({ days: index })
 
       return {
         ...it,
@@ -47,7 +51,7 @@ export const useUpdateSchedule = () => {
     })
 
     const removeIncompleteTasks = scheduleItems.map((item) => {
-      if (item?.date && item.date.day <= DateTime.now().day) {
+      if (item?.date && item.date.day <= currentDateTime.day) {
         if (item.completed) {
           return item
         }
@@ -78,7 +82,6 @@ export const useUpdateSchedule = () => {
       }
 
       if (overridingItem.date?.day <= scheduleItem.date?.day) {
-        console.log(overridingItem)
         return {
           ...overridingItem,
           day: scheduleItem.day

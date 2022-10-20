@@ -74,28 +74,27 @@ export function addTasks(scheduleItems: ScheduleItem[]) {
     }
 
     return week.map((scheduleItem) => {
-      // fixme: when looping current week which has 3 tasks, we get a arr with 3 objects, when we would want one
-      const dayProgram = currWeek.map((it) => {
+      const dayProgram = currWeek.map((dayTask) => {
         // no date means that item is outside of current month
         if (!scheduleItem.date) {
           return scheduleItem
         }
 
-        if (dayToNum[it.weekday] === scheduleItem.day) {
+        if (dayToNum[dayTask.weekday] === scheduleItem.day) {
           return {
             ...scheduleItem,
-            task: it.title,
-            completed: it.completed
+            task: dayTask.title,
+            completed: dayTask.completed
           }
         }
 
         return scheduleItem
       })
       // if day program has a task, return it by filtering others out
-      if (dayProgram.some((it) => it.task)) {
+      if (dayProgram.some(({ task }) => task)) {
         // remove nulls and duplicates before return
         const uniqueItems = [...new Set(dayProgram)]
-        return uniqueItems.filter((it) => it.task)[0]
+        return uniqueItems.filter(({ task }) => task)[0]
       }
 
       // remove nulls and duplicates before return
