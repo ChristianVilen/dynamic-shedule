@@ -1,7 +1,5 @@
 import { ProgramWeek, ScheduleItem } from './types'
-import tasks from '../examples/program.json'
-
-const programTasks: ProgramWeek = tasks
+import { DateTime } from 'luxon'
 
 const DAYS_IN_WEEK = 7
 
@@ -20,30 +18,50 @@ export const range = (start: number, end: number) =>
     .fill(undefined)
     .map((_, idx) => start + idx)
 
-export function fillWeekdays(scheduleItems: ScheduleItem[]): ScheduleItem[] {
-  const firstDay = scheduleItems.at(0) as ScheduleItem
-  const lastDay = scheduleItems.at(-1) as ScheduleItem
+export function getSchedule(now: DateTime) {
+  const firstDay = now.startOf('month')
+  const lastDay = now.endOf('month')
+  const datesInCurrentMonth = range(firstDay.day, lastDay.day)
+
+  return datesInCurrentMonth.map((dayNum) => {
+    const date = now.set({ day: dayNum })
+
+    return {
+      date,
+      day: date.weekday,
+      task: ''
+    }
+  })
+}
+
+export function fillWeekdaysThatAreNotInMonth(scheduleItems: ScheduleItem[]): ScheduleItem[] {
+  if (scheduleItems.length < 0) {
+    return []
+  }
+
+  const firstDay: ScheduleItem = scheduleItems.at(0)!
+  const lastDay: ScheduleItem = scheduleItems.at(-1)!
 
   if (firstDay.day === 1) {
     return scheduleItems
   }
 
-  const fillStart = [...Array(firstDay.day - 1).keys()].map((it) => ({
+  const fillStart = [...Array(firstDay.day - 1).keys()].map((dayNum) => ({
     date: null,
-    day: it + 1, // add one as it starts with 0
+    day: dayNum + 1, // add one as it starts with 0
     task: ''
   }))
 
-  const fillEnd = [...Array(DAYS_IN_WEEK - lastDay.day).keys()].map((it) => ({
+  const fillEnd = [...Array(DAYS_IN_WEEK - lastDay.day).keys()].map((dayNum) => ({
     date: null,
-    day: lastDay.day + it + 1, // add one as it starts with 0
+    day: lastDay.day + dayNum + 1, // add one as it starts with 0
     task: ''
   }))
 
   return [...fillStart, ...scheduleItems, ...fillEnd]
 }
 
-export function createBatches(scheduleItems: ScheduleItem[], batches: ScheduleItem[][]) {
+function createBatches(scheduleItems: ScheduleItem[], batches: ScheduleItem[][]) {
   let week: ScheduleItem[] = []
   scheduleItems.forEach((day, index) => {
     // start batching again once week is full
@@ -61,13 +79,13 @@ export function createBatches(scheduleItems: ScheduleItem[], batches: ScheduleIt
   })
 }
 
-export function addTasks(scheduleItems: ScheduleItem[]) {
+export function addTasks(scheduleItems: ScheduleItem[], taskList: ProgramWeek): ScheduleItem[] {
   const batches: ScheduleItem[][] = []
   // divide days into weeks, nested array
   createBatches(scheduleItems, batches)
 
   const tasksScheduled = batches.map((week, index) => {
-    const currWeek = programTasks[`week${index}`]
+    const currWeek = taskList[`week${index}`]
 
     if (!currWeek) {
       return week
