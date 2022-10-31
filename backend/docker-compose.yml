@@ -9,6 +9,9 @@ services:
     ports:
       - "5432:5432"
     stdin_open: true
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
     tty: true
     volumes:
       - ./data:/var/lib/postgresql/data
