@@ -1,6 +1,6 @@
 import Fastify from "fastify";
-import { routes } from "./src/route";
-import { schemas } from "./src/schema";
+import { routes } from "./src/modules/task/route";
+import { schemas } from "./src/modules/task/schema";
 
 const server = Fastify();
 
