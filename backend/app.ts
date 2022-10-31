@@ -1,15 +1,15 @@
 import Fastify from "fastify";
-import { routes } from "./src/modules/task/route";
-import { schemas } from "./src/modules/task/schema";
+import { taskSchemas } from "./src/modules/task/task.schema";
+import { taskRoute } from "./src/modules/task/task.route";
 
 const server = Fastify();
 
 async function main() {
-  for (const schema of schemas) {
+  for (const schema of taskSchemas) {
     server.addSchema(schema);
   }
 
-  server.register(routes, { prefix: "api/task" });
+  server.register(taskRoute, { prefix: "api/task" });
 
   try {
     await server.listen({ port: 3000 });

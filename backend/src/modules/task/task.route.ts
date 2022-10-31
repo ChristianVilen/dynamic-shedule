@@ -1,8 +1,8 @@
 import { FastifyInstance } from "fastify";
-import { insertHandler } from "./controller";
-import { $ref } from "./schema";
+import { insertHandler } from "./task.controller";
+import { $ref } from "./task.schema";
 
-export async function routes(server: FastifyInstance) {
+export async function taskRoute(server: FastifyInstance) {
   server.post(
     "/",
     {

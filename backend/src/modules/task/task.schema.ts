@@ -40,7 +40,7 @@ const tasksResponseSchema = z.array(taskResponseSchema);
 
 export type CreateTaskInput = z.infer<typeof creatTaskSchema>;
 
-export const { schemas, $ref } = buildJsonSchemas({
+export const { schemas: taskSchemas, $ref } = buildJsonSchemas({
   creatTaskSchema,
   taskResponseSchema,
   tasksResponseSchema,

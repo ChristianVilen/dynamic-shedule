@@ -1,6 +1,6 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { createTask } from "./service";
-import { CreateTaskInput } from "./schema";
+import { CreateTaskInput } from "./task.schema";
+import { createTask } from "./task.service";
 
 export async function insertHandler(
   req: FastifyRequest<{
