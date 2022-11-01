@@ -2,7 +2,7 @@ import './css/App.css'
 import { DateTime } from 'luxon'
 import { Calendar } from './components/Calendar'
 import { ProgramWeek, ScheduleItem } from './types'
-import { addTasks, fillWeekdaysThatAreNotInMonth, getSchedule, range } from './utils'
+import { addTasks, fillWeekdaysThatAreNotInMonth, getSchedule } from './utils'
 import tasks from '../examples/program.json'
 
 const programTasks: ProgramWeek = tasks
