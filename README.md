@@ -1,6 +1,8 @@
 # Implementation
 
-To get project running
+
+## Frontend
+To get project frontend running
 
 - `npm i && npm run dev`
 - project running at localhost:8000
@@ -8,8 +10,6 @@ To get project running
 The app now displays a schedule of the current month with the program tasks in the right places. Incomplete tasks are
 moved to the current day forward in the order of oldest -> newest. Program.json has some of my extra input to
 demonstrate the moving the incomplete tasks better.
-
-Notes:git rebase --interactive --root
 
 - Uses Vite to run project
 - Uses TypeScript
@@ -31,3 +31,8 @@ If a user has not completed an activity in the past, the activity will be moved 
 one activity per day. Thus if there are multiple incomplete activities in the past, the first incomplete activity will
 be displayed today, the second tomorrow, and so forth. For the previous days only completed activities will be
 displayed.
+
+## Backend
+- API: `npm i && npm run dev`
+- DB: `docker-compose up`
+- Migration `npx prisma migrate dev --name <insert name>`
