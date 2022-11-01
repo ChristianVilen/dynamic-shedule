@@ -26,8 +26,6 @@ const weekResponseSchema = z.object({
 
 const weeksResponseSchema = z.array(weekResponseSchema);
 
-export type CreateWeekInput = z.infer<typeof creatWeekSchema>;
-
 export const { schemas: weekSchemas, $ref } = buildJsonSchemas(
   {
     creatWeekSchema,

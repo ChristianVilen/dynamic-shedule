@@ -5,5 +5,6 @@ export async function getWeeksHandler() {
     return await getWeeksWithTasks();
   } catch (e) {
     console.error("failed to get weeks", e);
+    return new Error("Failed to get weeks");
   }
 }
