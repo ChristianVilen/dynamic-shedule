@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from '../css/calendar.module.css'
 import { ScheduleItem } from '../types'
-import { useUpdateSchedule } from '../useUpdateSchedule'
+import { useUpdateSchedule } from '../hooks/useUpdateSchedule'
 import { WeekHeader } from './WeekHeader'
 import { CalendarItem } from './CalendarItem'
 import { DateTime } from 'luxon'

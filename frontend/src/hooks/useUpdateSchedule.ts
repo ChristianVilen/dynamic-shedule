@@ -1,4 +1,4 @@
-import { ScheduleItem } from './types'
+import { ScheduleItem } from '../types'
 import { DateTime } from 'luxon'
 
 export const useUpdateSchedule = () => {
