@@ -31,7 +31,7 @@ const taskGenerated = {
 
 const creatTaskSchema = z.object(taskInput);
 
-const taskResponseSchema = z.object({
+export const taskResponseSchema = z.object({
   ...taskInput,
   ...taskGenerated,
 });
@@ -40,8 +40,11 @@ const tasksResponseSchema = z.array(taskResponseSchema);
 
 export type CreateTaskInput = z.infer<typeof creatTaskSchema>;
 
-export const { schemas: taskSchemas, $ref } = buildJsonSchemas({
-  creatTaskSchema,
-  taskResponseSchema,
-  tasksResponseSchema,
-});
+export const { schemas: taskSchemas, $ref } = buildJsonSchemas(
+  {
+    creatTaskSchema,
+    taskResponseSchema,
+    tasksResponseSchema,
+  },
+  { $id: "taskSchema" }
+);
