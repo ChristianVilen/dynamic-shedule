@@ -27,6 +27,7 @@ export function getSchedule(now: DateTime) {
     const date = now.set({ day: dayNum })
 
     return {
+      id: null,
       date,
       day: date.weekday,
       task: ''
@@ -47,12 +48,14 @@ export function fillWeekdaysThatAreNotInMonth(scheduleItems: ScheduleItem[]): Sc
   }
 
   const fillStart = [...Array(firstDay.day - 1).keys()].map((dayNum) => ({
+    id: null,
     date: null,
     day: dayNum + 1, // add one as it starts with 0
     task: ''
   }))
 
   const fillEnd = [...Array(DAYS_IN_WEEK - lastDay.day).keys()].map((dayNum) => ({
+    id: null,
     date: null,
     day: lastDay.day + dayNum + 1, // add one as it starts with 0
     task: ''
@@ -79,46 +82,45 @@ function createBatches(scheduleItems: ScheduleItem[], batches: ScheduleItem[][])
   })
 }
 
-export function addTasks(scheduleItems: ScheduleItem[], taskList: ProgramWeek): ScheduleItem[] {
+export function addTasks(scheduleItems: ScheduleItem[], taskList: ProgramWeek[]): ScheduleItem[] {
   const batches: ScheduleItem[][] = []
   // divide days into weeks, nested array
   createBatches(scheduleItems, batches)
 
   const tasksScheduled = batches.map((week, index) => {
-    const currWeek = taskList[`week${index}`]
-
+    const currWeek = taskList[index]
     if (!currWeek) {
       return week
     }
 
     return week.map((scheduleItem) => {
-      const dayProgram = currWeek.map((dayTask) => {
+      const currWeekMapped = currWeek.tasks.map((dayTask) => {
         // no date means that item is outside of current month
-        if (!scheduleItem.date) {
+        if (!scheduleItem.date || dayToNum[dayTask.weekday.toUpperCase()] !== scheduleItem.day) {
           return scheduleItem
         }
 
-        if (dayToNum[dayTask.weekday] === scheduleItem.day) {
-          return {
-            ...scheduleItem,
-            task: dayTask.title,
-            completed: dayTask.completed
-          }
+        return {
+          ...scheduleItem,
+          id: dayTask.id,
+          task: dayTask.title,
+          completed: dayTask.completed
         }
-
-        return scheduleItem
       })
+
+      const dayProgram = currWeekMapped.length > 0 ? currWeekMapped : [scheduleItem]
+
       // if day program has a task, return it by filtering others out
       if (dayProgram.some(({ task }) => task)) {
         // remove nulls and duplicates before return
         const uniqueItems = [...new Set(dayProgram)]
         return uniqueItems.filter(({ task }) => task)[0]
       }
-
       // remove nulls and duplicates before return
       return [...new Set(dayProgram)][0]
     })
   })
+
   // "un-batch" array, by dissolving nested arrays
   return tasksScheduled.flatMap((it) => it)
 }
