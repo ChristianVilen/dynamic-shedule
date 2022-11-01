@@ -31,6 +31,22 @@
   text-transform: uppercase;
 }
 
+.btn {
+  background-color: var(--green);
+  border-radius: 80px;
+  border: none;
+  color: white;
+  padding: 2px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+}
+
+.btn:hover {
+  background-color: pink;
+}
+
 .container {
   border-top: 3px solid var(--green);
   border-left: 3px solid var(--green);
