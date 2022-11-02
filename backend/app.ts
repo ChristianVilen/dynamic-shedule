@@ -4,6 +4,8 @@ import { TaskRoute } from "./src/modules/task/task.route";
 import { WeekRoute } from "./src/modules/week/week.route";
 import { weekSchemas } from "./src/modules/week/week.schema";
 import cors from "@fastify/cors";
+import * as dotenv from "dotenv";
+dotenv.config();
 
 const server = Fastify();
 
@@ -15,7 +17,7 @@ async function main() {
   server.register(cors, {
     origin: (origin, cb) => {
       const hostname = new URL(origin).hostname;
-      if (hostname === "localhost") {
+      if (process.env.NODE_ENV === "development" || hostname === "localhost") {
         cb(null, true);
         return;
       }
