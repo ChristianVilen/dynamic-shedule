@@ -31,6 +31,14 @@ const taskGenerated = {
 
 const creatTaskSchema = z.object(taskInput);
 
+const updateTaskSchema = z.object({
+  id: z.number(),
+  weekday: z.string().optional(),
+  title: z.string().optional(),
+  completed: z.boolean().optional(),
+  weekId: z.number().optional(),
+});
+
 export const taskResponseSchema = z.object({
   ...taskInput,
   ...taskGenerated,
@@ -39,10 +47,12 @@ export const taskResponseSchema = z.object({
 const tasksResponseSchema = z.array(taskResponseSchema);
 
 export type CreateTaskInput = z.infer<typeof creatTaskSchema>;
+export type UpdateTaskInput = z.infer<typeof updateTaskSchema>;
 
 export const { schemas: taskSchemas, $ref } = buildJsonSchemas(
   {
     creatTaskSchema,
+    updateTaskSchema,
     taskResponseSchema,
     tasksResponseSchema,
   },
