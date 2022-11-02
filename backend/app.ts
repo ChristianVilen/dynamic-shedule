@@ -25,6 +25,14 @@ async function main() {
       cb(new Error("Not allowed"), false);
     },
   });
+
+  server.addHook("preHandler", function (req, reply, next) {
+    if (req.body) {
+      console.info("Request info", { method: req.method, body: req.body });
+    }
+    next();
+  });
+
   server.register(TaskRoute, { prefix: "api/task" });
   server.register(WeekRoute, { prefix: "api/week" });
 
