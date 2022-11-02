@@ -16,7 +16,8 @@ async function main() {
 
   server.register(cors, {
     origin: (origin, cb) => {
-      const hostname = new URL(origin).hostname;
+      // if request comes from e.g. postman origin is undefined
+      const hostname = origin ? new URL(origin).hostname : null;
       if (process.env.NODE_ENV === "development" || hostname === "localhost") {
         cb(null, true);
         return;
