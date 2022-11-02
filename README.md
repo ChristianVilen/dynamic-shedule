@@ -1,5 +1,4 @@
-# Implementation
-
+# Implementation NOTE: project is WIP!
 
 ## Frontend
 To get project frontend running
@@ -32,7 +31,18 @@ one activity per day. Thus if there are multiple incomplete activities in the pa
 be displayed today, the second tomorrow, and so forth. For the previous days only completed activities will be
 displayed.
 
+### todo:
+- more connections to backend
+  - Create tasks
+  - Create weeks
+- Have all years weeks and show current months weeks
+- Be able to go to previous months
+
 ## Backend
+In backend directory
+- Create .env file `cp .env.example .env`
+- Fill in env vars
 - API: `npm i && npm run dev`
 - DB: `docker-compose up`
 - Migration `npx prisma migrate dev --name <insert name>`
+
