@@ -13,7 +13,11 @@ function App() {
   }
 
   if (!data) {
-    return <div>Error getting data</div>
+    return (
+      <div>
+        Error getting data <pre>{error}</pre>
+      </div>
+    )
   }
   const mapped: ProgramWeek[] = data.map((week) => {
     return {
