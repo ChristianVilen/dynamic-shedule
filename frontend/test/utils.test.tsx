@@ -1,14 +1,14 @@
 import { describe, expect, test } from 'vitest'
 import { ProgramWeek, ScheduleItem } from '../src/types'
-import { addTasks, fillWeekdaysThatAreNotInMonth, getSchedule, range } from '../src/utils'
+import { addTasks, fillWeekdaysThatAreNotInMonth, getSchedule, mapWeekInDataToProgram, range } from '../src/utils'
 import { DateTime } from 'luxon'
 // @ts-ignore
-import tasks from '../examples/program.json'
+import exampleWeekData from '../examples/program.json'
 
-const programTasks: ProgramWeek = tasks
 const DAYS_IN_MONTH = 30
 
 const resultExample: ScheduleItem = {
+  id: 1,
   date: DateTime.fromObject({ day: 1, month: 9, year: 2022 }),
   day: 4,
   task: ''
@@ -30,9 +30,10 @@ describe('test functions in utils', () => {
     expect(dayWithWeekDay.day).toEqual(4)
     expect(dayWithWeekDay.date.day).toEqual(resultExample.date.day)
   })
-  const scheduleWithTasks = addTasks(scheduleWithWeekdays, programTasks)
+  const weekData = mapWeekInDataToProgram(exampleWeekData)
+  const scheduleWithTasks = addTasks(scheduleWithWeekdays, weekData)
   test('should have tasks in day items', () => {
     const firstTask = scheduleWithTasks.find((it) => it.task.length > 0)
-    expect(firstTask.task).toEqual('The Health Program')
+    expect(firstTask.task).toEqual('The Science Behind Mindfulness')
   })
 })

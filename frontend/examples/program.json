@@ -1,65 +1,106 @@
-{
-  "week1": [
-    {
-      "weekday": "MONDAY",
-      "title": "The Health Program",
-      "completed": true
-    },
-    {
-      "weekday": "WEDNESDAY",
-      "title": "Introduction to the Program",
-      "completed": true
-    },
-    {
-      "weekday": "FRIDAY",
-      "title": "The Science Behind Mindfulness",
-      "completed": true
-    }
-  ],
-  "week2": [
-    {
-      "weekday": "MONDAY",
-      "title": "Mind on Autopilot",
-      "completed": true
-    },
-    {
-      "weekday": "WEDNESDAY",
-      "title": "Mindful Presence",
-      "completed": false
-    },
-    {
-      "weekday": "FRIDAY",
-      "title": "Consequences of Autopilot",
-      "completed": false
-    }
-  ],
-  "week3": [
-    {
-      "weekday": "MONDAY",
-      "title": "The Negativity Spiral",
-      "completed": true
-    },
-    {
-      "weekday": "WEDNESDAY",
-      "title": "Spiral of Negative Interpretations",
-      "completed": true
-    },
-    {
-      "weekday": "FRIDAY",
-      "title": "Interrupting the Negativity Spiral",
-      "completed": false
-    }
-  ],
-  "week4": [
-    {
-      "weekday": "MONDAY",
-      "title": "Task which should originally be monday",
-      "completed": false
-    },
-    {
-      "weekday": "FRIDAY",
-      "title": "Tome task which should be friday",
-      "completed": false
-    }
-  ]
-}
+[
+  {
+    "id": 1,
+    "weekNumber": 1,
+    "tasks": [
+      {
+        "id": 1,
+        "weekId": 1,
+        "weekday": "monday",
+        "weekday": "monday",
+        "title": "The Health Program",
+        "completed": true
+      },
+      {
+        "id": 2,
+        "weekId": 1,
+        "weekday": "wednesday",
+        "weekday": "wednesday",
+        "title": "Introduction to the Program",
+        "completed": true
+      },
+      {
+        "id": 3,
+        "weekId": 1,
+        "weekday": "friday",
+        "weekday": "friday",
+        "title": "The Science Behind Mindfulness",
+        "completed": true
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "weekNumber": 2,
+    "tasks": [
+      {
+        "id": 3,
+        "weekId": 2,
+        "weekday": "monday",
+        "title": "Mind on Autopilot",
+        "completed": true
+      },
+      {
+        "id": 4,
+        "weekId": 2,
+        "weekday": "wednesday",
+        "title": "Mindful Presence",
+        "completed": false
+      },
+      {
+        "id": 5,
+        "weekId": 2,
+        "weekday": "friday",
+        "title": "Consequences of Autopilot",
+        "completed": false
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "weekNumber": 3,
+    "tasks": [
+      {
+        "id": 5,
+        "weekId": 3,
+        "weekday": "monday",
+        "title": "The Negativity Spiral",
+        "completed": true
+      },
+      {
+        "id": 7,
+        "weekId": 3,
+        "weekday": "wednesday",
+        "title": "Spiral of Negative Interpretations",
+        "completed": true
+      },
+      {
+        "id": 8,
+        "weekId": 3,
+        "weekday": "friday",
+        "title": "Interrupting the Negativity Spiral",
+        "completed": false
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "weekNumber": 4,
+    "tasks": [
+      {
+        "id": 9,
+        "weekId": "4",
+        "weekday": "monday",
+        "title": "Task which should originally be monday",
+        "completed": false
+      },
+      {
+        "id": 10,
+        "weekId": "4",
+        "weekday": "friday",
+        "title": "Tome task which should be friday",
+        "completed": false
+      }
+    ]
+  }
+]
