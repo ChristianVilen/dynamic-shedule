@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    padding: 20px;
+}
+
+.inputItem {
+    margin: 20px;
+    text-align: left;
+}
+
+.inputItem label {
+    color: white;
+}

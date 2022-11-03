@@ -2,10 +2,13 @@ import './css/App.css'
 import { DateTime } from 'luxon'
 import { Calendar } from './components/Calendar'
 import { ProgramWeek, ScheduleItem } from './types'
-import { addTasks, fillWeekdaysThatAreNotInMonth, getSchedule } from './utils'
+import { addTasks, fillWeekdaysThatAreNotInMonth, getSchedule, mapWeekInDataToProgram } from './utils'
 import { useGetWeeks } from './hooks/useGetWeeks'
+import { CreateTask } from './components/CreateTask'
 
 function App() {
+  const now = DateTime.now()
+
   const { data, loading, error } = useGetWeeks('http://localhost:3000/api/week')
 
   if (loading) {
@@ -19,29 +22,15 @@ function App() {
       </div>
     )
   }
-  const mapped: ProgramWeek[] = data.map((week) => {
-    return {
-      id: week.id,
-      week: week.weekNumber,
-      tasks: week.tasks.map(({ id, weekday, title, completed }) => {
-        return {
-          id,
-          weekday,
-          title,
-          completed
-        }
-      })
-    }
-  })
-
-  const now = DateTime.now()
 
   const createSchedule: ScheduleItem[] = getSchedule(now)
   const scheduleWithWeekdays = fillWeekdaysThatAreNotInMonth(createSchedule)
-  const scheduleWithTasks = addTasks(scheduleWithWeekdays, mapped)
+  const programWeeks: ProgramWeek[] = mapWeekInDataToProgram(data)
+  const scheduleWithTasks = addTasks(scheduleWithWeekdays, programWeeks)
 
   return (
     <main>
+      <CreateTask />
       <Calendar scheduleItems={scheduleWithTasks} currentDateTime={now} />
     </main>
   )

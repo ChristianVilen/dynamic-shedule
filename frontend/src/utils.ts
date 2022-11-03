@@ -1,4 +1,4 @@
-import { ProgramWeek, ScheduleItem } from './types'
+import { ProgramWeek, ScheduleItem, WeekIn } from './types'
 import { DateTime } from 'luxon'
 
 const DAYS_IN_WEEK = 7
@@ -17,6 +17,23 @@ export const range = (start: number, end: number) =>
   Array(end - start + 1)
     .fill(undefined)
     .map((_, idx) => start + idx)
+
+export function mapWeekInDataToProgram(data: WeekIn[]) {
+  return data.map((week) => {
+    return {
+      id: week.id,
+      week: week.weekNumber,
+      tasks: week.tasks.map(({ id, weekday, title, completed }) => {
+        return {
+          id,
+          weekday,
+          title,
+          completed
+        }
+      })
+    }
+  })
+}
 
 export function getSchedule(now: DateTime) {
   const firstDay = now.startOf('month')
