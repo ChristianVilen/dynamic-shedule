@@ -1,4 +1,5 @@
 import styles from '../css/input.module.css'
+import { FormEvent } from 'react'
 
 type FormInput = {
   title: string
@@ -8,15 +9,9 @@ type FormInput = {
 }
 
 export const CreateTask = () => {
-  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
-
-    const input = [...formData.entries()].map((row) => {
-      return {
-        [row[0]]: row[1]
-      }
-    })
 
     const obj = [...formData.entries()].reduce((acc, [key, val]) => {
       return Object.assign(acc, { [key]: val })
